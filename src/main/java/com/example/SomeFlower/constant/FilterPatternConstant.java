@@ -4,9 +4,15 @@ public class FilterPatternConstant {
 
     //필터 제외할 url 모음
     public static String[] pathArray = new String[]{
-            "/member/{id:\\d+}",
-            "/member/join",
-            "/member/login",
+            "/v3/api-docs/**",
+            "/swagger-resources/**",
+            "/swagger-ui/**",
+            "/webjars/**",
+            "/swagger*/**",
+            "/swagger-ui/index.html",
+
+            "/api/member/join**",
+            "/api/member/login**",
             "/upload/*"
     };
 }

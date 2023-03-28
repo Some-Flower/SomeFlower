@@ -14,6 +14,7 @@ public interface MemberRepository extends JpaRepository<Member,Long> {
 
     //select m from user m where m.nickname = ?
     Optional<Member> findByNickName(@Param("nickName") String nickName);
+
     Optional<Member> findByEmail(@Param("email") String email);
 
     Page<Member> findMemberByStatus(MemberStatus status, Pageable pageable);

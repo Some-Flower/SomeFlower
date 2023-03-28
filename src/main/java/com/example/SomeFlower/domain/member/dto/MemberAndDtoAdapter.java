@@ -1,8 +1,10 @@
 package com.example.SomeFlower.domain.member.dto;
 
 import com.example.SomeFlower.domain.member.Member;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-
+@RequiredArgsConstructor
 public class MemberAndDtoAdapter {
 
     public static MemberDto entityToDto(Member member){

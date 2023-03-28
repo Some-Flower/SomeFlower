@@ -17,13 +17,10 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public class BaseTimeEntity {
 
-
-    @Builder.Default
     @CreatedDate
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @Builder.Default
     @LastModifiedDate
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;

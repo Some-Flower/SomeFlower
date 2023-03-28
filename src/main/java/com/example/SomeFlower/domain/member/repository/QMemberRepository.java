@@ -19,9 +19,9 @@ public class QMemberRepository {
     /**
      * 로그인 querydsl 연습
      */
-    public Member login(MemberDto.MemberLoginDto memberLoginDto){
+    public Member login(MemberDto.LoginDto loginDto){
         return jpaQueryFactory.selectFrom(member)
-                .where(member.email.eq(memberLoginDto.getEmail()))
+                .where(member.email.eq(loginDto.getEmail()))
                 .fetchOne();
     }
 
