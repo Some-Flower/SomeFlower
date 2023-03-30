@@ -1,7 +1,7 @@
 package com.example.SomeFlower.service.plant;
 
-import com.example.SomeFlower.domain.plant.Flower;
-import com.example.SomeFlower.domain.plant.PlantAdapter;
+import com.example.SomeFlower.domain.plant.data.Flower;
+import com.example.SomeFlower.domain.plant.dto.PlantAdapter;
 import com.example.SomeFlower.domain.plant.dto.FlowerDto;
 import com.example.SomeFlower.domain.plant.dto.PlantDto;
 import com.example.SomeFlower.domain.plant.repository.FlowerRepository;

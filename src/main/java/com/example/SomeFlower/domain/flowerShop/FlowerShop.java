@@ -1,6 +1,6 @@
 package com.example.SomeFlower.domain.flowerShop;
 
-import com.example.SomeFlower.domain.flowerShop.Address;
+import com.example.SomeFlower.domain.userGroup.seller.Seller;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -13,7 +13,13 @@ public class FlowerShop {
 
     private String shopName;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "seller_id")
+    private Seller seller;
+
     @Embedded
-    private Address address;
+    private ShopAddress shopAddress;
+
+
 
 }

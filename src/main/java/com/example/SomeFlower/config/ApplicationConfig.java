@@ -1,8 +1,8 @@
 package com.example.SomeFlower.config;
 
-import com.example.SomeFlower.domain.member.Member;
-import com.example.SomeFlower.domain.member.dto.MemberAdapter;
-import com.example.SomeFlower.domain.member.repository.MemberRepository;
+import com.example.SomeFlower.domain.userGroup.member.Member;
+import com.example.SomeFlower.domain.userGroup.member.dto.MemberAdapter;
+import com.example.SomeFlower.domain.userGroup.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

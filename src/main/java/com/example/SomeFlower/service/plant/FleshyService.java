@@ -1,9 +1,7 @@
 package com.example.SomeFlower.service.plant;
 
-import com.example.SomeFlower.domain.plant.Bulb;
-import com.example.SomeFlower.domain.plant.Fleshy;
-import com.example.SomeFlower.domain.plant.PlantAdapter;
-import com.example.SomeFlower.domain.plant.dto.BulbDto;
+import com.example.SomeFlower.domain.plant.data.Fleshy;
+import com.example.SomeFlower.domain.plant.dto.PlantAdapter;
 import com.example.SomeFlower.domain.plant.dto.FleshyDto;
 import com.example.SomeFlower.domain.plant.dto.PlantDto;
 import com.example.SomeFlower.domain.plant.repository.FleshyRepository;

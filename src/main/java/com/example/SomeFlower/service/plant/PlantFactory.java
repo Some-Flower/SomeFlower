@@ -1,11 +1,10 @@
 package com.example.SomeFlower.service.plant;
 
-import com.example.SomeFlower.domain.plant.Plant;
-import com.example.SomeFlower.domain.plant.PlantType;
+import com.example.SomeFlower.domain.plant.data.PlantType;
 import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
-import static com.example.SomeFlower.domain.plant.PlantType.*;
+import static com.example.SomeFlower.domain.plant.data.PlantType.*;
 
 @Component
 public class PlantFactory {

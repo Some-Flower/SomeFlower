@@ -1,14 +1,16 @@
 package com.example.SomeFlower.service.member;
 
-import com.example.SomeFlower.domain.member.Role;
-import com.example.SomeFlower.domain.member.dto.MemberAdapter;
+import com.example.SomeFlower.config.annotation.Validation;
+import com.example.SomeFlower.config.resTemplate.ResponseException;
+import com.example.SomeFlower.constant.ResponseTemplateStatus;
+import com.example.SomeFlower.domain.userGroup.member.dto.MemberAdapter;
 import com.example.SomeFlower.util.AuthToken;
 import com.example.SomeFlower.util.JwtService;
-import com.example.SomeFlower.domain.member.Member;
-import com.example.SomeFlower.domain.member.MemberStatus;
-import com.example.SomeFlower.domain.member.dto.MemberAndDtoAdapter;
-import com.example.SomeFlower.domain.member.dto.MemberDto;
-import com.example.SomeFlower.domain.member.repository.MemberRepository;
+import com.example.SomeFlower.domain.userGroup.member.Member;
+import com.example.SomeFlower.domain.userGroup.member.MemberStatus;
+import com.example.SomeFlower.domain.userGroup.member.dto.MemberAndDtoAdapter;
+import com.example.SomeFlower.domain.userGroup.member.dto.MemberDto;
+import com.example.SomeFlower.domain.userGroup.member.repository.MemberRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +19,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import static com.example.SomeFlower.constant.ResponseTemplateStatus.LOGIN_USER_ERROR;
 
 @Service @Slf4j
 @RequiredArgsConstructor
@@ -28,13 +32,16 @@ public class MemberService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+    /**
+     * 회원가입
+     */
     @Transactional
-    public Long join(MemberDto joinDto) throws Exception {
+    @Validation
+    public Long join(MemberDto.JoinDto joinDto) {
         validateDuplicateEmail(joinDto.getEmail());
+        validateDuplicateNickName(joinDto.getNickName());
         Member member = MemberAndDtoAdapter.dtoToEntity(joinDto);
         member.setPwd(passwordEncoder.encode(joinDto.getPwd()));
-        member.setRole(Role.valueOf("USER"));
-
         memberRepository.save(member);
         return member.getId();
     }
@@ -56,43 +63,50 @@ public class MemberService {
                 AuthToken authToken = jwtService.generateToken(new MemberAdapter(member));
                 return authToken;
             }
-            throw new RuntimeException();
+            throw new ResponseException(LOGIN_USER_ERROR);
         }
         catch (NullPointerException e){
             e.printStackTrace();
-            throw new RuntimeException();
+            throw new ResponseException(LOGIN_USER_ERROR);
         }
     }
 
     /**
      * 회원 정보 수정
-     *
-     * @return
      */
     @Transactional
-    public MemberDto update(Long id, MemberDto.UpdateDto updateDto) throws Exception{
+    public Member update(Long id, MemberDto.UpdateDto updateDto){
+        validateDuplicateNickName(updateDto.getNickName());
         Member member = memberRepository.findById(id).get();
         member.update(updateDto);
-        return MemberAndDtoAdapter.entityToDto(member);
+        return member;
     }
 
     /**
      * 회원 삭제 -> 삭제 상태로 변경
      */
     @Transactional
-    public void changeMemberStatus(Long id, MemberStatus status){
-        Member member = memberRepository.findById(id).get();
-        member.setStatus(status);
+    public void changeMemberStatus(Long id){
+        Member member = memberRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        member.setStatus(MemberStatus.DELETED);
     }
 
     /**
      * 이메일 중복 검사
      */
-    public void validateDuplicateEmail(String email) throws Exception {
+    public void validateDuplicateEmail(String email) throws ResponseException {
         if (memberRepository.findByEmail(email).isPresent()){
-            throw new Exception("이메일 중복");
+            throw new ResponseException(ResponseTemplateStatus.EMAIL_DUPLICATE);
         }
     }
 
+    /**
+     * 닉네임 중복 검사
+     */
+    public void validateDuplicateNickName(String nickName) throws ResponseException {
+        if (memberRepository.findByNickName(nickName).isPresent()){
+            throw new ResponseException(ResponseTemplateStatus.NICKNAME_DUPLICATE);
+        }
+    }
 
 }
