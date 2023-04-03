@@ -50,6 +50,7 @@ public class MemberService {
      * 로그인
      */
     @Transactional
+    @Validation
     public AuthToken login(MemberDto.LoginDto loginDto){
         try{
             Member member = memberRepository.findByEmail(loginDto.getEmail()).orElseThrow(NullPointerException::new);
@@ -75,6 +76,7 @@ public class MemberService {
      * 회원 정보 수정
      */
     @Transactional
+    @Validation
     public Member update(Long id, MemberDto.UpdateDto updateDto){
         validateDuplicateNickName(updateDto.getNickName());
         Member member = memberRepository.findById(id).get();
