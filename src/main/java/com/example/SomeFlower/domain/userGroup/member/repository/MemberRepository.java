@@ -1,6 +1,6 @@
 package com.example.SomeFlower.domain.userGroup.member.repository;
+import com.example.SomeFlower.domain.userGroup.Status;
 import com.example.SomeFlower.domain.userGroup.member.Member;
-import com.example.SomeFlower.domain.userGroup.member.MemberStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,6 +17,6 @@ public interface MemberRepository extends JpaRepository<Member,Long> {
 
     Optional<Member> findByEmail(@Param("email") String email);
 
-    Page<Member> findMemberByStatus(MemberStatus status, Pageable pageable);
+    Page<Member> findMemberByStatus(Status status, Pageable pageable);
 
 }

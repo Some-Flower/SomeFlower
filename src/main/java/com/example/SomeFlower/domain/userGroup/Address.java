@@ -1,4 +1,4 @@
-package com.example.SomeFlower.domain.userGroup.member;
+package com.example.SomeFlower.domain.userGroup;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberAddress {
+public class Address {
 
     private String city;
     private String street;

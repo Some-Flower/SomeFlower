@@ -13,6 +13,8 @@ public class FilterPatternConstant {
 
             "/api/member/join**",
             "/api/member/login**",
+            "/api/seller/join**",
+            "/api/seller/login**",
             "/upload/*"
     };
 }

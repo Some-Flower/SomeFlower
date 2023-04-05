@@ -1,13 +1,13 @@
-package com.example.SomeFlower.service.member;
+package com.example.SomeFlower.service.userGroup.member;
 
 import com.example.SomeFlower.config.annotation.Validation;
 import com.example.SomeFlower.config.resTemplate.ResponseException;
 import com.example.SomeFlower.constant.ResponseTemplateStatus;
+import com.example.SomeFlower.domain.userGroup.Status;
 import com.example.SomeFlower.domain.userGroup.member.dto.MemberAdapter;
 import com.example.SomeFlower.util.AuthToken;
 import com.example.SomeFlower.util.JwtService;
 import com.example.SomeFlower.domain.userGroup.member.Member;
-import com.example.SomeFlower.domain.userGroup.member.MemberStatus;
 import com.example.SomeFlower.domain.userGroup.member.dto.MemberAndDtoAdapter;
 import com.example.SomeFlower.domain.userGroup.member.dto.MemberDto;
 import com.example.SomeFlower.domain.userGroup.member.repository.MemberRepository;
@@ -19,8 +19,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import static com.example.SomeFlower.constant.ResponseTemplateStatus.LOGIN_USER_ERROR;
+import static com.example.SomeFlower.constant.ResponseTemplateStatus.WITHDRAWAL_USER_ERROR;
 
 @Service @Slf4j
 @RequiredArgsConstructor
@@ -88,9 +88,12 @@ public class MemberService {
      * 회원 삭제 -> 삭제 상태로 변경
      */
     @Transactional
-    public void changeMemberStatus(Long id){
+    public void changeMemberStatus(Long id,MemberDto.WithdrawDto withdrawDto){
         Member member = memberRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        member.setStatus(MemberStatus.DELETED);
+        if (passwordEncoder.matches(withdrawDto.getPwd(), member.getPwd())){
+            member.setStatus(Status.DELETED);
+        }
+        throw new ResponseException(WITHDRAWAL_USER_ERROR);
     }
 
     /**

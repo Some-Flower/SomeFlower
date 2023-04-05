@@ -1,8 +1,8 @@
 package com.example.SomeFlower.domain.userGroup.member.dto;
 
+import com.example.SomeFlower.domain.userGroup.Status;
 import com.example.SomeFlower.domain.userGroup.member.Member;
-import com.example.SomeFlower.domain.userGroup.member.MemberStatus;
-import com.example.SomeFlower.domain.userGroup.member.Role;
+import com.example.SomeFlower.domain.userGroup.Role;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -16,7 +16,7 @@ public class MemberAndDtoAdapter {
                 .nickName(member.getNickName())
                 .phoneNumber(member.getPhoneNumber())
                 .profileImage(member.getProfileImage())
-                .memberAddress(member.getMemberAddress())
+                .address(member.getAddress())
                 .role(member.getRole())
                 .status(member.getStatus())
                 .build();
@@ -30,9 +30,9 @@ public class MemberAndDtoAdapter {
                 .nickName(joinDto.getNickName())
                 .phoneNumber(joinDto.getPhoneNumber())
                 .profileImage(joinDto.getProfileImage())
-                .memberAddress(joinDto.getMemberAddress())
+                .address(joinDto.getAddress())
                 .role(Role.USER)
-                .status(MemberStatus.ACTIVE)
+                .status(Status.ACTIVE)
                 .build();
 
         return member;

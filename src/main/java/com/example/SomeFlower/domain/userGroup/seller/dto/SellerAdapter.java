@@ -1,17 +1,19 @@
-package com.example.SomeFlower.domain.userGroup.member.dto;
+package com.example.SomeFlower.domain.userGroup.seller.dto;
 
-import com.example.SomeFlower.domain.userGroup.member.Member;
+import com.example.SomeFlower.domain.userGroup.seller.Seller;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Slf4j
 @AllArgsConstructor
-public class MemberAdapter implements UserDetails {
+public class SellerAdapter implements UserDetails {
 
-    private Member member;
+    private Seller seller;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -19,7 +21,7 @@ public class MemberAdapter implements UserDetails {
         collect.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return "ROLE_" + member.getRole().name();
+                return seller.getRole().name();
             }
         });
         return collect;
@@ -27,12 +29,12 @@ public class MemberAdapter implements UserDetails {
 
     @Override
     public String getPassword() {
-        return member.getPwd();
+        return seller.getPwd();
     }
 
     @Override
     public String getUsername() {
-        return member.getEmail();
+        return seller.getEmail();
     }
 
     @Override
@@ -55,7 +57,7 @@ public class MemberAdapter implements UserDetails {
         return true;
     }
 
-    public Member getMember(){
-        return member;
+    public Seller getSeller(){
+        return seller;
     }
 }

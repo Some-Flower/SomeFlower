@@ -1,12 +1,11 @@
-package com.example.SomeFlower.controller.member;
+package com.example.SomeFlower.controller.userGroup.member;
 
 import com.example.SomeFlower.config.annotation.CurrentUser;
 import com.example.SomeFlower.config.resTemplate.ResponseTemplate;
 import com.example.SomeFlower.domain.userGroup.member.Member;
 import com.example.SomeFlower.domain.userGroup.member.dto.MemberDto;
-import com.example.SomeFlower.service.member.MemberService;
+import com.example.SomeFlower.service.userGroup.member.MemberService;
 import com.example.SomeFlower.util.AuthToken;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -44,9 +43,10 @@ public class MemberSignController {
     /**
      * 회원 탈퇴 : 유저의 상태를 변경
      */
-    @DeleteMapping("/withdrawl")
-    public ResponseTemplate<String> withDrawl(@CurrentUser Member member) {
-        memberService.changeMemberStatus(member.getId());
+    @DeleteMapping("/withdraw")
+    public ResponseTemplate<String> withDraw(@RequestBody MemberDto.WithdrawDto withdrawDto, @CurrentUser Member member) {
+
+        memberService.changeMemberStatus(member.getId(),withdrawDto);
         return ResponseTemplate.of(SUCCESS);
     }
 }

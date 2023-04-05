@@ -2,13 +2,11 @@ package com.example.SomeFlower.domain.userGroup.member.dto;
 
 import com.example.SomeFlower.config.resTemplate.ResponseException;
 import com.example.SomeFlower.constant.ResponseTemplateStatus;
-import com.example.SomeFlower.constant.ServiceConstant;
 import com.example.SomeFlower.domain.Validatable;
-import com.example.SomeFlower.domain.userGroup.member.MemberAddress;
-import com.example.SomeFlower.domain.userGroup.member.MemberStatus;
-import com.example.SomeFlower.domain.userGroup.member.Role;
+import com.example.SomeFlower.domain.userGroup.Address;
+import com.example.SomeFlower.domain.userGroup.Status;
+import com.example.SomeFlower.domain.userGroup.Role;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,9 +28,9 @@ public class MemberDto {
     private String nickName;
     private String phoneNumber;
     private String profileImage;
-    private MemberAddress memberAddress;
+    private Address address;
     private Role role;
-    private MemberStatus status;
+    private Status status;
 
     @AllArgsConstructor
     @NoArgsConstructor
@@ -54,7 +52,7 @@ public class MemberDto {
         private String profileImage;
 
         @NotBlank(message = "주소는 필수 입력값입니다.")
-        private MemberAddress memberAddress;
+        private Address address;
 
         @Override
         public void validate(){
@@ -100,21 +98,27 @@ public class MemberDto {
         private String nickName;
         private String phoneNumber;
         private String profileImage;
-        private MemberAddress memberAddress;
+        private Address address;
 
         @Override
         public void validate() {
-            log.info("login");
-            log.info("폰검사 시작");
             if(!REGEX_PHONENUM.matcher(this.phoneNumber).matches()){
                 throw new ResponseException(PHONENUM_FORM_INVALID);
             }
-            log.info("폰검사  끝");
             if(!REGEX_NICKNAME.matcher(this.nickName).matches()){
                 throw new ResponseException(NICKNAME_SIZE_INVALID);
             }
         }
     }
+
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Getter @Builder
+    public static class WithdrawDto{
+        private String pwd;
+
+    }
+
 
 
 }

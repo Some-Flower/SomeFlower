@@ -1,4 +1,4 @@
-package com.example.SomeFlower.domain.userGroup.member;
+package com.example.SomeFlower.domain.userGroup;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 public enum Role {
     GUEST("ROLE_GUEST","손님"),
     USER("ROLE_USER","사용자"),
-    FLORIST("ROLE_FLORIST","플로리스트"),
+    SELLER("ROLE_SELLER","판매자"),
     ADMIN("ROLE_ADMIN","관리자");
 
     private final String roleKey;

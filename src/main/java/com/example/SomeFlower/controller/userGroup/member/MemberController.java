@@ -1,19 +1,16 @@
-package com.example.SomeFlower.controller.member;
+package com.example.SomeFlower.controller.userGroup.member;
 
 import com.example.SomeFlower.config.annotation.CurrentUser;
 import com.example.SomeFlower.config.resTemplate.ResponseTemplate;
 import com.example.SomeFlower.domain.userGroup.member.Member;
-import com.example.SomeFlower.domain.userGroup.member.MemberStatus;
 import com.example.SomeFlower.domain.userGroup.member.dto.MemberDto;
-import com.example.SomeFlower.service.member.MemberService;
+import com.example.SomeFlower.service.userGroup.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
-
-import static com.example.SomeFlower.constant.ResponseTemplateStatus.SUCCESS;
 
 @Slf4j
 @RestController
