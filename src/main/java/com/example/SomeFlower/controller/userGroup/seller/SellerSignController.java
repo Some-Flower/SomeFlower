@@ -37,8 +37,8 @@ public class SellerSignController {
      * 로그인
      */
     @PostMapping("/login")
-    public ResponseEntity<ResponseTemplate<String>> loginSeller(@RequestBody MemberDto.LoginDto loginDto) throws ResponseStatusException {
-        AuthToken token = sellerService.login(loginDto);
+    public ResponseEntity<ResponseTemplate<String>> loginSeller(@RequestBody SellerLoginDto sellerLoginDto) throws ResponseStatusException {
+        AuthToken token = sellerService.login(sellerLoginDto);
         return ResponseEntity.ok()
                 .headers(HttpHeaders.readOnlyHttpHeaders(token.asHeaders()))
                 .body(ResponseTemplate.valueOf("login success"));

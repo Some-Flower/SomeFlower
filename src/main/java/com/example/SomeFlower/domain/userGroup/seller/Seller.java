@@ -3,20 +3,20 @@ package com.example.SomeFlower.domain.userGroup.seller;
 import com.example.SomeFlower.domain.flowerShop.FlowerShop;
 import com.example.SomeFlower.domain.userGroup.Role;
 import com.example.SomeFlower.domain.userGroup.Status;
+import com.example.SomeFlower.domain.userGroup.seller.dto.SellerUpdateDto;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
-@Getter @Builder @Setter
+@Getter @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name  = "seller")
 public class Seller {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "seller_id")
     private Long id;
     private String email;
@@ -26,37 +26,21 @@ public class Seller {
     private String profileImage;
 
     @OneToMany(mappedBy = "seller",
-            cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<FlowerShop> flowerShops = new ArrayList();
+            cascade = CascadeType.ALL)
+    private List<FlowerShop> flowerShops;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
     @Enumerated(value = EnumType.STRING)
     private Status status;
 
-//    public void update(SellerDto.UpdateDto updateDto){
-//        this.name = updateDto.get
-//    }
-
-    public static Seller createSeller(String email,String pwd,String name, String phoneNumber,
-                                      String profileImage,Role role, Status status){
-        return Seller.builder()
-                .email(email)
-                .pwd(pwd)
-                .name(name)
-                .phoneNumber(phoneNumber)
-                .profileImage(profileImage)
-                .role(role)
-                .status(status)
-                .build();
-    }
-
-    public void putFlowerShop(FlowerShop flowerShop){
-        this.flowerShops.add(flowerShop);
-    }
-
     public void setStatus(Status status){this.status = status; }
     public void setRole(Role role){this.role = role; }
     public void setPwd(String pwd) { this.pwd = pwd; }
 
+    public void update(SellerUpdateDto sellerUpdateDto) {
+        this.name = sellerUpdateDto.getName();
+        this.phoneNumber = sellerUpdateDto.getPhoneNumber();
+        this.profileImage = sellerUpdateDto.getProfileImage();
+    }
 }

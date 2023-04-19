@@ -15,7 +15,7 @@ import java.util.Date;
 @Table(name="flowershop")
 public class FlowerShop {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="flowershop_id")
     private Long id;
     private String shopName;
@@ -32,19 +32,13 @@ public class FlowerShop {
 
     private Address address;
 
-    public static FlowerShop createFlowerShop(String shopName,String description,String shopImage,String shopLink,String businessHours,
-                                              String businessDates,String shopNumber,Seller seller,Address address){
-        return FlowerShop.builder()
-                .shopName(shopName)
-                .description(description)
-                .shopImage(shopImage)
-                .shopLink(shopLink)
-                .businessHours(businessHours)
-                .businessDates(businessDates)
-                .shopNumber(shopNumber)
-                .seller(seller)
-                .address(address)
-                .build();
+    public void update(FlowerShopUpdateDto updateDto) {
+        this.shopName = updateDto.getShopImage();
+        this.description = updateDto.getDescription();
+        this.shopImage = updateDto.getShopImage();
+        this.shopLink = updateDto.getShopLink();
+        this.businessHours = updateDto.getBusinessHours();
+        this.businessDates = updateDto.getBusinessDates();
+        this.shopNumber = updateDto.getShopNumber();
     }
-
 }

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @DiscriminatorValue("flower")
 public class Flower{
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "flower_id")
     private Long id;
 

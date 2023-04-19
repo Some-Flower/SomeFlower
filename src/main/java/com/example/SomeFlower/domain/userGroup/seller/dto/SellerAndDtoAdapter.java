@@ -5,20 +5,10 @@ import com.example.SomeFlower.domain.userGroup.Status;
 import com.example.SomeFlower.domain.userGroup.seller.Seller;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
+
 @RequiredArgsConstructor
 public class SellerAndDtoAdapter {
-//    public static SellerJoinDtoDto entityToDto(Seller seller){
-//        return SellerDto.builder()
-//                .id(seller.getId())
-//                .email(seller.getEmail())
-//                .pwd(seller.getPwd())
-//                .name(seller.getName())
-//                .phoneNumber(seller.getPhoneNumber())
-//                .profileImage(seller.getProfileImage())
-//                .role(seller.getRole())
-//                .status(seller.getStatus())
-//                .build();
-//    }
 
     public static Seller dtoToEntity(SellerJoinDto joinDto){
         Seller seller = Seller.builder()
@@ -27,6 +17,7 @@ public class SellerAndDtoAdapter {
                 .name(joinDto.getName())
                 .phoneNumber(joinDto.getPhoneNumber())
                 .profileImage(joinDto.getProfileImage())
+                .flowerShops(new ArrayList<>())
                 .role(Role.SELLER)
                 .status(Status.ACTIVE)
                 .build();

@@ -21,7 +21,7 @@ public class SellerAdapter implements UserDetails {
         collect.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return seller.getRole().name();
+                return "ROLE_" + seller.getRole().name();
             }
         });
         return collect;

@@ -7,7 +7,7 @@ import lombok.Getter;
 //manytomany 연결
 @Entity @Getter
 public class PlantCategory {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

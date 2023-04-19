@@ -22,9 +22,10 @@ public enum ResponseTemplateStatus {
     PASSWORD_FORM_INVALID(HttpStatus.BAD_REQUEST,"비밀번호 형식 에러" ,3004 ),
     NICKNAME_SIZE_INVALID(HttpStatus.BAD_REQUEST,"닉네임 형식 에러",3005),
     PHONENUM_FORM_INVALID(HttpStatus.BAD_REQUEST,"휴대폰 번호 에러",3006),
-    EMAIL_DUPLICATE(HttpStatus.BAD_REQUEST,"중복된 이메일입니다",3007),
-    NICKNAME_DUPLICATE(HttpStatus.BAD_REQUEST,"중복된 닉네임입니다.",3008),
-    PWD_FORM_INVALID(HttpStatus.BAD_REQUEST,"비밀번호 형식 오류",3009),
+    SHOPNUM_FORM_INVALID(HttpStatus.BAD_REQUEST,"가게 번호 에러",3007),
+    EMAIL_DUPLICATE(HttpStatus.BAD_REQUEST,"중복된 이메일입니다",3008),
+    NICKNAME_DUPLICATE(HttpStatus.BAD_REQUEST,"중복된 닉네임입니다.",3009),
+    PWD_FORM_INVALID(HttpStatus.BAD_REQUEST,"비밀번호 형식 오류",3010),
 
     LOGICAL_ERROR(HttpStatus.INTERNAL_SERVER_ERROR,"서버 내부 논리 에러",9000);
 

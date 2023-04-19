@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity @Builder @Getter
@@ -15,12 +16,14 @@ import java.util.List;
 @AllArgsConstructor
 public class Plant {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "plant_id")
     private Long id;
 
     private String name;
     private String description;
+
+//    @OneToMany(mappedBy = "flower", cascade = CascadeType.ALL)
     private String color;
     private int price;
     private String image;

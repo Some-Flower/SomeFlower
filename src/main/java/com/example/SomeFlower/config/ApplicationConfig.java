@@ -41,7 +41,7 @@ public class ApplicationConfig {
     private final SellerRepository sellerRepository;
 
     @Bean // loadBYUsername userdetails 반환
-    @Primary
+    @Qualifier("memberDetailsService")
     public UserDetailsService memberDetailsService() {
         return new UserDetailsService() {
             @Override
@@ -54,6 +54,7 @@ public class ApplicationConfig {
     }
 
     @Bean // loadBYUsername userdetails 반환
+    @Qualifier("sellerDetailsService")
     public UserDetailsService sellerDetailsService() {
         return new UserDetailsService() {
             @Override
